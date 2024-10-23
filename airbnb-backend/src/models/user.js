@@ -1,13 +1,13 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  taiKhoan: { type: String, required: true, unique: true },
-  matKhau: { type: String, required: true },
-  hoTen: { type: String, required: true },
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  soDT: { type: String, required: true },
-  maLoaiNguoiDung: { type: String, default: "KhachHang" },
-  avatar: { type: String },
+  password: { type: String, required: true },
+  phone: { type: String },
+  birthday: { type: Date }, // Assuming you want to store birthdays
+  gender: { type: String, enum: ["male", "female", "other"] }, // Or any other options
+  role: { type: String, enum: ["user", "admin"], default: "user" },
 });
 
-module.exports = mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);
