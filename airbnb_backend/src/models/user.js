@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const paginate = require("mongoose-paginate-v2");
 
 const UserSchema = new mongoose.Schema({
   id: { type: Number, required: true },
@@ -10,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   gender: { type: Boolean },
   role: { type: String, default: "user" },
 });
-
+UserSchema.plugin(paginate);
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
