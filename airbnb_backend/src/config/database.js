@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
 
+const uri =
+  "mongodb+srv://Hieu:Hieu2612@airbnb.pxszq.mongodb.net/?retryWrites=true&w=majority";
+
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error(`Error: ${error.message}`);
+    await mongoose.connect(uri);
+    console.log("MongoDB connected!!");
+  } catch (err) {
+    console.error("Failed to connect to MongoDB:", err);
     process.exit(1);
   }
 };
