@@ -1,13 +1,15 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const updateUserSchema = new mongoose.Schema({
-  _id: { type: Number },
+const UpdateUserSchema = new mongoose.Schema({
+  id: { type: Number, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },
-  phone: { type: String },
+  phone: { type: String, required: true },
   birthday: { type: String },
   gender: { type: Boolean },
   role: { type: String },
 });
 
-export default mongoose.model("UpdateUser", updateUserSchema);
+const UpdateUser = mongoose.model("UpdateUser", UpdateUserSchema);
+
+module.exports = UpdateUser;
