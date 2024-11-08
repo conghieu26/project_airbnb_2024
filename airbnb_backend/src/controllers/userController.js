@@ -31,7 +31,7 @@ exports.deleteAllUsers = async (req, res) => {
   }
 };
 
-// GET /api/users/phan-trang-tim-kiem - Get users with pagination and search
+// GET /api/users/paginate-search - Get users with pagination and search
 exports.getUsersWithPaginationAndSearch = async (req, res) => {
   try {
     const { page = 1, limit = 10, keyword = "" } = req.query;
