@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-import { db } from "./database.js";
 import { ViTriViewModel } from "./ViTriViewModel.js";
+import { db } from "./database.js";
 
 export const PhongViewModel = db.define("PhongViewModel", {
   id: {
@@ -28,5 +28,4 @@ export const PhongViewModel = db.define("PhongViewModel", {
   hinhAnh: { type: DataTypes.STRING },
 });
 
-// Liên kết với ViTriViewModel
 PhongViewModel.belongsTo(ViTriViewModel, { foreignKey: "maViTri" });

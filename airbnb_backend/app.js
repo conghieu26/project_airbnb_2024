@@ -1,17 +1,25 @@
-const express = require("express");
-const connectDB = require("./src/config/database"); // Assuming database.js is in the same directory
-
+import express from "express";
+import { db } from "./src/config/database.js";
+import userRoutes from "./src/routes/userRoutes.js";
 const app = express();
-
-// Connect to MongoDB
-connectDB();
-
-// Middleware
-app.use(express.json());
-
-// Routes
-// ... your route files (e.g., require('./routes/users'))
-
 const PORT = 3000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.use(express.json());
+
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
+
+app.use("/api", userRoutes);
+
+db.sync()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server đang chạy tại http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Lỗi đồng bộ cơ sở dữ liệu:", error);
+  });
