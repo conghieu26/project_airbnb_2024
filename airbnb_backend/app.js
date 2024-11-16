@@ -9,6 +9,7 @@ const PORT = 3000;
 
 // Middleware để xử lý JSON và các request body
 app.use(express.json());
+app.use(fileUpload());
 
 app.use(
   express.urlencoded({

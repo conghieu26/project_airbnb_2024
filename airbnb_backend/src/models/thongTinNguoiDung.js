@@ -13,5 +13,8 @@ export const ThongTinNguoiDung = db.define("ThongTinNguoiDung", {
   phone: { type: DataTypes.STRING },
   birthday: { type: DataTypes.STRING },
   gender: { type: DataTypes.BOOLEAN },
-  role: { type: DataTypes.STRING, defaultValue: "user" },
+  role: {
+    type: DataTypes.STRING,
+    defaultValue: "user",
+  },
 });
