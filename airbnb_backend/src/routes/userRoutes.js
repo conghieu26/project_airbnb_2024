@@ -17,27 +17,27 @@ const router = express.Router();
 router.use(fileUpload());
 
 // Lấy tất cả người dùng
-router.get("/users", getAllUsers);
+router.get("/", getAllUsers);
 
 // Tạo người dùng mới
-router.post("/users", createUser);
+router.post("/", createUser);
 
 // Xóa người dùng
-router.delete("/users/:id", deleteUser);
+router.delete("/:id", deleteUser);
 
 // Phân trang và tìm kiếm người dùng
-router.get("/users/phan-trang-tim-kiem", getUsersWithPaginationAndSearch);
+router.get("/phan-trang-tim-kiem", getUsersWithPaginationAndSearch);
 
 // Lấy người dùng theo ID
-router.get("/users/:id", getUserById);
+router.get("/:id", getUserById);
 
 // Cập nhật người dùng
-router.put("/users/:id", updateUser);
+router.put("/:id", updateUser);
 
 // Tìm kiếm người dùng theo tên
-router.get("/users/search/:TenNguoiDung", searchUserByName);
+router.get("/search/:TenNguoiDung", searchUserByName);
 
 // Upload avatar
-router.post("/users/upload-avatar/:id", uploadAvatar);
+router.post("/upload-avatar/:id", uploadAvatar);
 
 export default router;

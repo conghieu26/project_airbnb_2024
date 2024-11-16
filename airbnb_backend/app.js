@@ -18,7 +18,8 @@ app.use(
 // Middleware để xử lý upload file (nếu sử dụng express-fileupload)
 app.use(fileUpload());
 
-app.use("/api", userRoutes);
+
+app.use("/api/users", userRoutes);
 app.use("/api/vi-tri", viTriRoutes);
 
 db.sync()
