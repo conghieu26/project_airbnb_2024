@@ -162,9 +162,14 @@ export const searchUserByName = async (req, res) => {
 // Tạo đường dẫn thư mục upload cho ảnh
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+<<<<<<< HEAD
 const uploadDir = path.join(__dirname, "../uploads/avatars");
 
 // Kiểm tra nếu thư mục không tồn tại, tạo mới
+=======
+const uploadDir = path.join(__dirname, "../uploads/users");
+
+>>>>>>> 45d86322d854b5cd44f5a8ed314faa0fce58ae18
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
