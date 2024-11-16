@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { ThongTinNguoiDung } from "../models/ThongTinNguoiDung.js";
+import { ThongTinNguoiDung } from "../models/thongTinNguoiDung.js";
 
 // Lấy tất cả người dùng
 export const getAllUsers = async (req, res) => {

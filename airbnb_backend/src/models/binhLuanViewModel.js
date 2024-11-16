@@ -1,7 +1,9 @@
 import { DataTypes } from "sequelize";
-import { PhongViewModel } from "./PhongViewModel.js";
-import { ThongTinNguoiDung } from "./ThongTinNguoiDung.js";
+
 import { db } from "./database.js";
+import { PhongViewModel } from "../models/phongViewModel.js";
+import { ThongTinNguoiDung } from "../models/thongTinNguoiDung.js";
+
 
 export const BinhLuanViewModel = db.define("BinhLuanViewModel", {
   id: {
