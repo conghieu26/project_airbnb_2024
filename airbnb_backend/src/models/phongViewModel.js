@@ -1,5 +1,4 @@
 import { DataTypes } from "sequelize";
-
 import { db } from "../config/database.js";
 import { ViTriViewModel } from "../models/viTriViewModel.js";
 

@@ -1,7 +1,5 @@
 import { DataTypes } from "sequelize";
-
 import { db } from "../config/database.js";
-
 import { PhongViewModel } from "../models/phongViewModel.js";
 import { ThongTinNguoiDung } from "../models/thongTinNguoiDung.js";
 
