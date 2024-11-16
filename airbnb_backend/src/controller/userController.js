@@ -159,8 +159,8 @@ export const searchUserByName = async (req, res) => {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const uploadDir = path.join(__dirname, "../uploads/users");
 
-const uploadDir = path.join(__dirname, "../uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -175,7 +175,7 @@ export const uploadAvatar = async (req, res) => {
     }
 
     const avatar = req.files.avatar;
-    const uploadPath = path.join(__dirname, "../uploads", avatar.name);
+    const uploadPath = path.join(uploadDir, avatar.name);
 
     avatar.mv(uploadPath, (err) => {
       if (err) {
