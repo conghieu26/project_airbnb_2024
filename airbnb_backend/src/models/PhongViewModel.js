@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { ViTriViewModel } from "./ViTriViewModel.js";
+import { ViTriViewModel } from "./viTriViewModel.js";
 import { db } from "./database.js";
 
 export const PhongViewModel = db.define("PhongViewModel", {
