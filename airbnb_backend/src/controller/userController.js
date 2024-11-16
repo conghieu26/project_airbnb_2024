@@ -19,6 +19,8 @@ export const createUser = async (req, res) => {
   try {
     const { name, email, password, phone, birthday, gender, role } = req.body;
 
+    const userRole = role || "user";
+
     const newUser = await ThongTinNguoiDung.create({
       name,
       email,
@@ -26,7 +28,7 @@ export const createUser = async (req, res) => {
       phone,
       birthday,
       gender,
-      role,
+      role: userRole,
     });
 
     res.status(201).json(newUser);
@@ -157,26 +159,27 @@ export const searchUserByName = async (req, res) => {
   }
 };
 
+// Tạo đường dẫn thư mục upload cho ảnh
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const uploadDir = path.join(__dirname, "../uploads/avatars");
 
-const uploadDir = path.join(__dirname, "../uploads");
+// Kiểm tra nếu thư mục không tồn tại, tạo mới
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
-// Upload avatar cho người dùng
+
 export const uploadAvatar = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const user = await ThongTinNguoiDung.findByPk(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "Người dùng không tìm thấy" });
+    // Kiểm tra nếu tệp đã được gửi trong yêu cầu
+    if (!req.files || !req.files.avatar) {
+      return res.status(400).json({ message: "Vui lòng gửi tệp hình ảnh" });
     }
 
     const avatar = req.files.avatar;
-    const uploadPath = path.join(__dirname, "../uploads", avatar.name);
+    const uploadPath = path.join(uploadDir, avatar.name);
 
+    // Di chuyển tệp vào thư mục đích
     avatar.mv(uploadPath, (err) => {
       if (err) {
         console.error("Lỗi khi upload avatar:", err);
@@ -185,8 +188,7 @@ export const uploadAvatar = async (req, res) => {
           .json({ message: "Lỗi máy chủ", error: err.message });
       }
 
-      user.avatar = uploadPath;
-      user.save();
+      // Đáp lại thông báo khi tải lên thành công
       res.status(200).json({
         message: "Avatar đã được tải lên thành công",
         avatarPath: uploadPath,

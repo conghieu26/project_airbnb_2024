@@ -1,10 +1,12 @@
 import express from "express";
+import fileUpload from "express-fileupload";
 import { db } from "./src/config/database.js";
 import userRoutes from "./src/routes/userRoutes.js";
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(fileUpload());
 
 app.use(
   express.urlencoded({

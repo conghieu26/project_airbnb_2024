@@ -1,5 +1,4 @@
 import express from "express";
-import fileUpload from "express-fileupload";
 import {
   createUser,
   deleteUser,
@@ -13,8 +12,6 @@ import {
 
 const router = express.Router();
 
-// Middleware để hỗ trợ upload file
-router.use(fileUpload());
 
 // Lấy tất cả người dùng
 router.get("/", getAllUsers);
@@ -38,6 +35,6 @@ router.put("/:id", updateUser);
 router.get("/search/:TenNguoiDung", searchUserByName);
 
 // Upload avatar
-router.post("/upload-avatar/:id", uploadAvatar);
+router.post("/upload-avatar", uploadAvatar);
 
 export default router;
