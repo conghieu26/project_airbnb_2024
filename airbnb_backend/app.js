@@ -12,7 +12,7 @@ app.use(
   })
 );
 
-app.use("/api", userRoutes);
+app.use("/api/users", userRoutes);
 
 db.sync()
   .then(() => {
