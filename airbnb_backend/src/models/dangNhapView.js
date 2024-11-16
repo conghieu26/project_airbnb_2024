@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { db } from "./database.js";
+import { db } from "../config/database.js";
 
 export const DangNhapView = db.define("DangNhapView", {
   email: { type: DataTypes.STRING, allowNull: false },
