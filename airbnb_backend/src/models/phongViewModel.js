@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
+
 import { db } from "../config/database.js";
 import { ViTriViewModel } from "../models/viTriViewModel.js";
+
 
 export const PhongViewModel = db.define("PhongViewModel", {
   id: {
