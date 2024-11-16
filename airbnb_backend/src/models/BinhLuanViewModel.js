@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { PhongViewModel } from "./PhongViewModel.js";
+import { PhongViewModel } from "./phongViewModel.js";
 import { ThongTinNguoiDung } from "./ThongTinNguoiDung.js";
 import { db } from "./database.js";
 
