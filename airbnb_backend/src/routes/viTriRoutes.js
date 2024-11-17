@@ -6,7 +6,7 @@ import {
   getLocationById,
   getLocationsWithPaginationAndSearch,
   updateLocationById,
-  uploadLocationImage,
+// uploadLocationImage,
 } from "../controller/viTriController.js";
 
 const router = express.Router();
@@ -29,7 +29,7 @@ router.put("/:id", updateLocationById);
 // Xóa vị trí theo id
 router.delete("/:id", deleteLocationById);
 
-// Upload hình ảnh cho vị trí
-router.post("/upload-hinh-vitri", uploadLocationImage);
+// // Upload hình ảnh cho vị trí
+// router.post("/upload-hinh-vitri", uploadLocationImage);
 
 export default router;

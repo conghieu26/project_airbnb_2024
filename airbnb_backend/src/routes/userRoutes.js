@@ -7,7 +7,7 @@ import {
   getUsersWithPaginationAndSearch,
   searchUserByName,
   updateUser,
-  uploadAvatar,
+  // uploadAvatar,
 } from "../controller/userController.js";
 
 const router = express.Router();
@@ -34,7 +34,7 @@ router.put("/:id", updateUser);
 // Tìm kiếm người dùng theo tên
 router.get("/search/:TenNguoiDung", searchUserByName);
 
-// Upload avatar
-router.post("/upload-avatar", uploadAvatar);
+// // Upload avatar
+// router.post("/upload-avatar", uploadAvatar);
 
 export default router;

@@ -159,43 +159,49 @@ export const searchUserByName = async (req, res) => {
   }
 };
 
-// Tạo đường dẫn thư mục upload cho ảnh
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// // Lấy đường dẫn hiện tại của file đang chạy (ES Modules)
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-const uploadDir = path.join(__dirname, "../uploads/avatars");
+// // Tạo thư mục uploads nếu không tồn tại
+// const uploadDir = path.join(__dirname, "../uploads");
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir, { recursive: true });
+// }
 
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+// // Tải lên avatar
+// export const uploadAvatar = async (req, res) => {
+//   try {
+//     const userId = req.params.id;
+//     const user = await ThongTinNguoiDung.findByPk(userId);
 
-export const uploadAvatar = async (req, res) => {
-  try {
-    // Kiểm tra nếu tệp đã được gửi trong yêu cầu
-    if (!req.files || !req.files.avatar) {
-      return res.status(400).json({ message: "Vui lòng gửi tệp hình ảnh" });
-    }
+//     if (!user) {
+//       return res.status(404).json({ message: "Người dùng không tìm thấy" });
+//     }
 
-    const avatar = req.files.avatar;
-    const uploadPath = path.join(uploadDir, avatar.name);
+//     const avatar = req.files.avatar;
 
-    // Di chuyển tệp vào thư mục đích
-    avatar.mv(uploadPath, (err) => {
-      if (err) {
-        console.error("Lỗi khi upload avatar:", err);
-        return res
-          .status(500)
-          .json({ message: "Lỗi máy chủ", error: err.message });
-      }
+//     // Xử lý tên file để đảm bảo tính tương thích
+//     const avatarName = avatar.name.replace(/[^a-zA-Z0-9.-]/g, "_"); // Thay thế ký tự đặc biệt
+//     const uploadPath = path.join(uploadDir, avatarName);
 
-      // Đáp lại thông báo khi tải lên thành công
-      res.status(200).json({
-        message: "Avatar đã được tải lên thành công",
-        avatarPath: uploadPath,
-      });
-    });
-  } catch (error) {
-    console.error("Lỗi khi tải avatar:", error);
-    res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
-  }
-};
+//     avatar.mv(uploadPath, (err) => {
+//       if (err) {
+//         console.error("Lỗi khi upload avatar:", err);
+//         return res
+//           .status(500)
+//           .json({ message: "Lỗi máy chủ", error: err.message });
+//       }
+
+//       user.avatar = uploadPath; // Lưu đường dẫn avatar vào người dùng
+//       user.save();
+//       res.status(200).json({
+//         message: "Avatar đã được tải lên thành công",
+//         avatarPath: uploadPath,
+//       });
+//     });
+//   } catch (error) {
+//     console.error("Lỗi khi tải avatar:", error);
+//     res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
+//   }
+// };

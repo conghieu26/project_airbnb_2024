@@ -128,40 +128,66 @@ export const deleteLocationById = async (req, res) => {
   }
 };
 
-// Upload hình ảnh vị trí
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-const uploadDir = path.join(__dirname, "../uploads", "locations");
+// // Hàm upload hình ảnh cho vị trí
 
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
 
-export const uploadLocationImage = async (req, res) => {
-  try {
-    if (!req.files || !req.files.hinhAnh) {
-      return res.status(400).json({ message: "Vui lòng gửi hình ảnh vị trí" });
-    }
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// const uploadDir = path.join(__dirname, "../uploads", "locations");
 
-    const image = req.files.hinhAnh;
-    const uploadPath = path.join(uploadDir, image.name);
+// // Tạo thư mục lưu file nếu chưa tồn tại
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir, { recursive: true });
+// }
 
-    image.mv(uploadPath, async (err) => {
-      if (err) {
-        console.error("Lỗi khi upload hình ảnh:", err);
-        return res
-          .status(500)
-          .json({ message: "Lỗi máy chủ", error: err.message });
-      }
+// export const uploadLocationImage = async (req, res) => {
+//   try {
+//     // Kiểm tra xem có file hay không
+//     if (!req.files || !req.files.formFile) {
+//       return res.status(400).json({ message: "Vui lòng gửi hình ảnh vị trí" });
+//     }
 
-      res.status(200).json({
-        message: "Hình ảnh đã được tải lên thành công",
-        hinhAnhPath: uploadPath,
-      });
-    });
-  } catch (error) {
-    console.error("Lỗi khi tải hình ảnh:", error);
-    res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
-  }
-};
+//     // Lấy file từ request
+//     const image = req.files.formFile;
+
+//     // Kiểm tra nếu không có tên file, không thể di chuyển
+//     if (!image.name) {
+//       return res.status(400).json({ message: "Tên file không hợp lệ" });
+//     }
+
+//     // Tạo đường dẫn lưu file
+//     const uploadPath = path.join(uploadDir, image.name);
+//     console.log("Đường dẫn upload:", uploadPath); // Kiểm tra đường dẫn trong console
+
+//     // Di chuyển file tới thư mục đã chỉ định
+//     image.mv(uploadPath, (err) => {
+//       if (err) {
+//         console.error("Lỗi khi upload file:", err);
+//         return res
+//           .status(500)
+//           .json({ message: "Lỗi máy chủ", error: err.message });
+//       }
+
+//       // Cập nhật vào cơ sở dữ liệu nếu cần
+//       const maViTri = req.query.maViTri; // Lấy mã vị trí từ query string
+//       ViTriViewModel.update({ hinhAnh: uploadPath }, { where: { id: maViTri } })
+//         .then(() => {
+//           res.status(200).json({
+//             message: "Hình ảnh đã được tải lên thành công",
+//             hinhAnhPath: uploadPath,
+//           });
+//         })
+//         .catch((error) => {
+//           console.error("Lỗi khi cập nhật thông tin vị trí:", error);
+//           res.status(500).json({
+//             message: "Lỗi khi cập nhật thông tin vị trí",
+//             error: error.message,
+//           });
+//         });
+//     });
+//   } catch (error) {
+//     console.error("Lỗi khi tải hình ảnh:", error);
+//     res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
+//   }
+// };
