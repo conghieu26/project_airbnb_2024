@@ -1,6 +1,7 @@
 import express from "express";
 import fileUpload from "express-fileupload";
 import { db } from "./src/config/database.js";
+import phongRoutes from "./src/routes/phongRoutes.js";
 import signInRoutes from "./src/routes/signInRoutes.js";
 import signUpRoutes from "./src/routes/signUpRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
@@ -30,7 +31,8 @@ app.use("/api/users", userRoutes);
 
 // Api thông tin vị trí
 app.use("/api/vi-tri", viTriRoutes);
-
+// Api phòng Thuê
+app.use("/api/phong-thue", phongRoutes);
 db.sync()
   .then(() => {
     app.listen(PORT, () => {

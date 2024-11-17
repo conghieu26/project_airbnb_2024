@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+// import fs from "fs";
+// import path from "path";
 import { Op } from "sequelize";
-import { fileURLToPath } from "url";
+// import { fileURLToPath } from "url";
 import { ViTriViewModel } from "../models/viTriViewModel.js";
 
 // Lấy tất cả vị trí
