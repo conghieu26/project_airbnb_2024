@@ -27,3 +27,15 @@ export const createRoom = async (req, res) => {
     res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
   }
 };
+
+// Lấy danh sách phòng theo mã vị trí
+export const getRoomsByLocation = async (req, res) => {
+  try {
+    const { maViTri } = req.query;
+    const rooms = await PhongViewModel.findAll({ where: { maViTri } });
+    res.status(200).json(rooms);
+  } catch (error) {
+    console.error("Lỗi khi lấy phòng theo vị trí:", error);
+    res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
+  }
+};
