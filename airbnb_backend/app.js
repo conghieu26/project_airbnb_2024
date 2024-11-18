@@ -6,6 +6,7 @@ import signInRoutes from "./src/routes/signInRoutes.js";
 import signUpRoutes from "./src/routes/signUpRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import viTriRoutes from "./src/routes/viTriRoutes.js";
+import datPhongRoutes from "./src/routes/datPhongRoutes.js";
 
 const app = express();
 const PORT = 3000;
@@ -31,8 +32,12 @@ app.use("/api/users", userRoutes);
 
 // Api thông tin vị trí
 app.use("/api/vi-tri", viTriRoutes);
+
 // Api phòng Thuê
 app.use("/api/phong-thue", phongRoutes);
+
+// Api đặt phòng
+app.use("/api/dat-phong", datPhongRoutes);
 db.sync()
   .then(() => {
     app.listen(PORT, () => {
