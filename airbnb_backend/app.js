@@ -1,13 +1,12 @@
 import express from "express";
 import fileUpload from "express-fileupload";
 import { db } from "./src/config/database.js";
+import authRoutes from "./src/routes/authRoutes.js";
+import binhLuanRoutes from "./src/routes/binhLuanRoutes.js";
+import datPhongRoutes from "./src/routes/datPhongRoutes.js";
 import phongRoutes from "./src/routes/phongRoutes.js";
-import signInRoutes from "./src/routes/signInRoutes.js";
-import signUpRoutes from "./src/routes/signUpRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import viTriRoutes from "./src/routes/viTriRoutes.js";
-import datPhongRoutes from "./src/routes/datPhongRoutes.js";
-import binhLuanRoutes from "./src/routes/binhLuanRoutes.js";
 
 const app = express();
 const PORT = 3000;
@@ -22,11 +21,8 @@ app.use(
 );
 app.use(fileUpload());
 
-// Đăng ký
-app.use("/api/auth", signUpRoutes);
-
-// Đăng nhập
-app.use("/api/auth", signInRoutes);
+// Api đăng ký và đăng nhập
+app.use("/api/auth", authRoutes);
 
 // Api thông tin người dùng
 app.use("/api/users", userRoutes);
