@@ -7,6 +7,7 @@ import signUpRoutes from "./src/routes/signUpRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import viTriRoutes from "./src/routes/viTriRoutes.js";
 import datPhongRoutes from "./src/routes/datPhongRoutes.js";
+import binhLuanRoutes from "./src/routes/binhLuanRoutes.js";
 
 const app = express();
 const PORT = 3000;
@@ -38,6 +39,10 @@ app.use("/api/phong-thue", phongRoutes);
 
 // Api đặt phòng
 app.use("/api/dat-phong", datPhongRoutes);
+
+// Api Bình luận
+app.use("/api/binh-luan", binhLuanRoutes);
+
 db.sync()
   .then(() => {
     app.listen(PORT, () => {
