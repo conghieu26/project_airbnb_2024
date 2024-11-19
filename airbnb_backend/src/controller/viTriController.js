@@ -1,7 +1,7 @@
-// import fs from "fs";
-// import path from "path";
+import fs from "fs";
+import multer from "multer";
+import path from "path";
 import { Op } from "sequelize";
-// import { fileURLToPath } from "url";
 import { ViTriViewModel } from "../models/viTriViewModel.js";
 
 // Lấy tất cả vị trí
@@ -19,7 +19,12 @@ export const getAllLocations = async (req, res) => {
 export const createLocation = async (req, res) => {
   try {
     const { tenViTri, tinhThanh, quocGia, hinhAnh } = req.body;
+
+    const maxUserId = await ViTriViewModel.max("id");
+    const newUserId = maxUserId + 1;
+
     const newLocation = await ViTriViewModel.create({
+      id: newUserId,
       tenViTri,
       tinhThanh,
       quocGia,
@@ -167,9 +172,9 @@ export const deleteLocationById = async (req, res) => {
 //         return res
 //           .status(500)
 //           .json({ message: "Lỗi máy chủ", error: err.message });
-//       }
+    //       }
 
-//       // Cập nhật vào cơ sở dữ liệu nếu cần
+    //       // Cập nhật vào cơ sở dữ liệu nếu cần
 //       const maViTri = req.query.maViTri; // Lấy mã vị trí từ query string
 //       ViTriViewModel.update({ hinhAnh: uploadPath }, { where: { id: maViTri } })
 //         .then(() => {
@@ -188,6 +193,6 @@ export const deleteLocationById = async (req, res) => {
 //     });
 //   } catch (error) {
 //     console.error("Lỗi khi tải hình ảnh:", error);
-//     res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
-//   }
+        //     res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
+      //   }
 // };

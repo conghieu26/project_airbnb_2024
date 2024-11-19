@@ -19,9 +19,13 @@ export const createUser = async (req, res) => {
   try {
     const { name, email, password, phone, birthday, gender, role } = req.body;
 
+    const maxUserId = await ThongTinNguoiDung.max("id");
+    const newUserId = maxUserId + 1;
+
     const userRole = role || "user";
 
     const newUser = await ThongTinNguoiDung.create({
+      id: newUserId,
       name,
       email,
       password,
