@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import fileUpload from "express-fileupload";
 import { db } from "./src/config/database.js";
@@ -20,6 +21,8 @@ app.use(
   })
 );
 app.use(fileUpload());
+
+app.use(cors());
 
 // Api đăng ký và đăng nhập
 app.use("/api/auth", authRoutes);

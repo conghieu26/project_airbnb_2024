@@ -11,5 +11,6 @@ export const ViTriViewModel = db.define("ViTriViewModel", {
   tenViTri: { type: DataTypes.STRING, allowNull: false },
   tinhThanh: { type: DataTypes.STRING },
   quocGia: { type: DataTypes.STRING },
+  // Type: longBLOG 
   hinhAnh: { type: DataTypes.STRING },
 });
