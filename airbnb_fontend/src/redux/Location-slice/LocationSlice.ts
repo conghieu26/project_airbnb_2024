@@ -12,9 +12,10 @@ export const getInspectOfSearchPage = createAsyncThunk(
     try {
       const resp = await axiosInterceptorWithCybertoken.get("/api/vi-tri/");
       console.log(resp);
-      return resp;
+      return resp.data; // Trả về chỉ dữ liệu (data) từ phản hồi
     } catch (error) {
       console.log(error);
+      return []; // Trả về mảng trống nếu có lỗi
     }
   },
 );
@@ -26,9 +27,10 @@ export const getListRoomByIdLocation = createAsyncThunk(
       const resp = await axiosInterceptorWithCybertoken.get(
         `/api/phong-thue/lay-phong-theo-vi-tri?maViTri=${id}`,
       );
-      return resp;
+      return resp.data; // Trả về chỉ dữ liệu (data) từ phản hồi
     } catch (error) {
       console.log(error);
+      return []; // Trả về mảng trống nếu có lỗi
     }
   },
 );
@@ -44,10 +46,10 @@ export const locationSlice = createSlice({
   reducers: {},
   extraReducers: (build) => {
     build.addCase(getInspectOfSearchPage.fulfilled, (state, action) => {
-      state.inspectOfSearchPage = action.payload?.data;
+      state.inspectOfSearchPage = action.payload; // Chỉ lưu dữ liệu trả về
     });
     build.addCase(getListRoomByIdLocation.fulfilled, (state, action) => {
-      state.listRoomByIdLocation = action.payload?.data;
+      state.listRoomByIdLocation = action.payload; // Chỉ lưu dữ liệu trả về
     });
   },
 });

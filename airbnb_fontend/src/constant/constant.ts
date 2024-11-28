@@ -1,5 +1,4 @@
 export const ACCESS_TOKEN = "accessToken";
-// export const BASE_URL = "https://airbnbnew.cybersoft.edu.vn";
 export const BASE_URL = "http://localhost:3000";
 export const ACCESS_USER_ID = "accessUserById";
 export const PAGE_SIZE = 2;
