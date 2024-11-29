@@ -40,36 +40,40 @@ export const createLocation = async (req, res) => {
 // Phân trang và tìm kiếm vị trí
 export const getLocationsWithPaginationAndSearch = async (req, res) => {
   try {
-    let { page = 1, size = 10, search = "" } = req.query;
+    // Lấy các tham số phân trang và tìm kiếm từ query
+    const { pageIndex = 1, pageSize = 8, keyword = "" } = req.query;
 
-    // Chuyển đổi page và size thành kiểu số
-    page = parseInt(page, 10);
-    size = parseInt(size, 10);
+    // Chuyển đổi pageIndex và pageSize thành số nguyên
+    const pageNumber = parseInt(pageIndex, 10);
+    const sizeNumber = parseInt(pageSize, 10);
 
-    // Kiểm tra xem page và size có hợp lệ không
-    if (isNaN(page) || isNaN(size)) {
+    // Kiểm tra giá trị pageIndex và pageSize
+    if (isNaN(pageNumber) || isNaN(sizeNumber)) {
       return res
         .status(400)
-        .json({ message: "Page và size phải là số hợp lệ" });
+        .json({ message: "pageIndex và pageSize phải là số hợp lệ." });
     }
 
-    const offset = (page - 1) * size;
+    // Tính toán offset cho phân trang
+    const offset = (pageNumber - 1) * sizeNumber;
 
-    const users = await ViTriViewModel.findAndCountAll({
+    // Tìm kiếm và phân trang
+    const locations = await ViTriViewModel.findAndCountAll({
       where: {
         tenViTri: {
-          [Op.like]: `%${search}%`,
+          [Op.like]: `%${keyword}%`,
         },
       },
-      limit: size,
+      limit: sizeNumber,
       offset: offset,
     });
 
+    // Định dạng dữ liệu trả về
     res.status(200).json({
-      data: users.rows,
-      total: users.count,
-      totalPages: Math.ceil(users.count / size),
-      currentPage: page,
+      data: locations.rows, // Danh sách vị trí
+      total: locations.count, // Tổng số vị trí
+      totalPages: Math.ceil(locations.count / sizeNumber), // Tổng số trang
+      currentPage: pageNumber, // Trang hiện tại
     });
   } catch (error) {
     console.error("Lỗi khi phân trang và tìm kiếm vị trí:", error);

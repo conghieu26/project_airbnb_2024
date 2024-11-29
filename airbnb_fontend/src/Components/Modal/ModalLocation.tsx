@@ -34,7 +34,7 @@ export default function BasicModal({ children, value, setValue }: TProps) {
   const stateData = useSelector(
     (state: RootState) => state.sliceLocation.inspectOfSearchPage,
   );
-  console.log(stateData);
+  // console.log(stateData);
   const stateDataLocation = useGetInspectOfSearchPage();
   const listData =
     stateData.length > 0 ? [...stateData] : [...stateDataLocation];

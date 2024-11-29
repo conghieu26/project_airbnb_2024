@@ -19,7 +19,7 @@ export const useLoginRenderAva = (getAcessToken: string) => {
   const profileData = useSelector(
     (state: RootState) => state.sliceUser.profileData,
   );
-  console.log(profileData);
+  // console.log(profileData);
   let avaName = "";
   if (profileData) {
     avaName =

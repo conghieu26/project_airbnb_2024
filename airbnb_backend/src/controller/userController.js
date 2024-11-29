@@ -1,6 +1,7 @@
 // import fs from "fs";
 // import path from "path";
 // import { fileURLToPath } from "url";
+import { Op } from "sequelize";
 import { ThongTinNguoiDung } from "../models/thongTinNguoiDung.js";
 
 // Lấy tất cả người dùng
@@ -63,16 +64,16 @@ export const deleteUser = async (req, res) => {
 // Phân trang và tìm kiếm người dùng
 export const getUsersWithPaginationAndSearch = async (req, res) => {
   try {
-    // Lấy giá trị phân trang và tìm kiếm từ query
-    const { page = 1, size = 10, search = "" } = req.query;
 
-    const pageNumber = parseInt(page);
-    const sizeNumber = parseInt(size);
+    const { pageIndex = 1, pageSize = 8, keyword = "" } = req.query;
+
+    const pageNumber = parseInt(pageIndex);
+    const sizeNumber = parseInt(pageSize);
 
     if (isNaN(pageNumber) || isNaN(sizeNumber)) {
       return res
         .status(400)
-        .json({ message: "Page và size phải là số hợp lệ." });
+        .json({ message: "pageIndex và pageSize phải là số hợp lệ." });
     }
 
     const offset = (pageNumber - 1) * sizeNumber;
@@ -80,7 +81,7 @@ export const getUsersWithPaginationAndSearch = async (req, res) => {
     const users = await ThongTinNguoiDung.findAndCountAll({
       where: {
         name: {
-          [Sequelize.Op.like]: `%${search}%`,
+          [Op.like]: `%${keyword}%`,
         },
       },
       limit: sizeNumber,
